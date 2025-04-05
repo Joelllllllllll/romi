@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Aniversario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'naranja': {
+                            100: '#FFF0E6',
+                            200: '#FFD6B8',
+                            300: '#FFBB8A',
+                            400: '#FFA05C',
+                            500: '#FF852E',
+                            600: '#FF6A00',
+                            700: '#CC5500',
+                            800: '#994000',
+                            900: '#662B00',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'confetti': 'confetti 10s ease-in-out infinite',
+                        'heart': 'heart 1.5s ease-in-out infinite',
+                        'sparkle': 'sparkle 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        confetti: {
+                            '0%': { transform: 'translateY(-10vh) rotate(0deg)' },
+                            '100%': { transform: 'translateY(100vh) rotate(360deg)' },
+                        },
+                        heart: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.3)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        sparkle: {
+                            '0%': { transform: 'scale(0) rotate(0deg)', opacity: 0 },
+                            '50%': { transform: 'scale(1) rotate(180deg)', opacity: 1 },
+                            '100%': { transform: 'scale(0) rotate(360deg)', opacity: 0 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0.7;
+            animation-duration: calc(10s + (var(--delay) * 5s));
+            animation-delay: calc(var(--delay) * 1s);
+            animation-iteration-count: infinite;
+            transform-origin: center;
+        }
+        
+        @keyframes rotate-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .rotate-continuous {
+            animation: rotate-animation 20s linear infinite;
+        }
+        
+        .card-open {
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        
+        .card-open:hover {
+            transform: rotateY(160deg);
+        }
+        
+        .card-front, .card-inside {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .card-inside {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-naranja-100 min-h-screen font-sans">
+    
+
+    <!-- Sección principal con la tarjeta -->
+    <main class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-naranja-700 mb-4">¡Feliz Aniversario!</h2>
+                <p class="text-lg text-naranja-600 max-w-2xl mx-auto">Celebra este día especial con nuestra tarjeta animada personalizada.</p>
+            </div>
+
+            <!-- Tarjeta de aniversario con animación -->
+            <div class="flex justify-center items-center mb-16">
+                <div class="relative w-full max-w-md aspect-[3/4] perspective-1000">
+                    <div class="card-open w-full h-full">
+                        <!-- Frente de la tarjeta -->
+                        <div class="card-front bg-gradient-to-br from-naranja-300 to-naranja-600 rounded-xl shadow-2xl p-6 flex flex-col items-center justify-center">
+                            <div class="animate-float">
+                                <div class="w-24 h-24 mx-auto mb-6 animate-spin-slow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" fill="white" />
+                                    </svg>
+                                </div>
+                                <div class="text-white text-center">
+                                    <h3 class="text-2xl font-bold mb-2">¡Feliz Aniversario!</h3>
+                                    <p class="text-lg">Pasa el cursor sobre la tarjeta</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Elementos decorativos animados -->
+                            <div class="absolute top-4 left-4 animate-bounce-slow">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M21.5,6.5c0,2.5-2,4.5-4.5,4.5c-0.5,0-1-0.1-1.5-0.3c-0.5,0.2-1,0.3-1.5,0.3c-2.5,0-4.5-2-4.5-4.5s2-4.5,4.5-4.5c0.5,0,1,0.1,1.5,0.3c0.5-0.2,1-0.3,1.5-0.3C19.5,2,21.5,4,21.5,6.5z"/>
+                                    <path d="M14.5,17.5c0,2.5-2,4.5-4.5,4.5c-0.5,0-1-0.1-1.5-0.3c-0.5,0.2-1,0.3-1.5,0.3c-2.5,0-4.5-2-4.5-4.5s2-4.5,4.5-4.5c0.5,0,1,0.1,1.5,0.3c0.5-0.2,1-0.3,1.5-0.3C12.5,13,14.5,15,14.5,17.5z"/>
+                                </svg>
+                            </div>
+                            <div class="absolute bottom-4 right-4 animate-pulse-slow">
+                                <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+                                    <path d="M12,6c-3.31,0-6,2.69-6,6s2.69,6,6,6s6-2.69,6-6S15.31,6,12,6z M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z"/>
+                                    <circle cx="12" cy="12" r="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Interior de la tarjeta -->
+                        <div class="card-inside bg-white rounded-xl shadow-inner p-6 flex flex-col items-center justify-center">
+                            <div class="text-center">
+                                <div class="mb-4 animate-heart">
+                                    <svg class="w-16 h-16 mx-auto text-naranja-500" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-naranja-700 mb-4">¡Un año más juntos!</h3>
+                                <p class="text-naranja-600 mb-6">
+                                    Cada momento a tu lado ha sido un regalo. Gracias por compartir tu vida conmigo. 
+                                    Que nuestro amor siga creciendo con cada día que pasa.
+                                </p>
+                                <p class="font-bold text-naranja-700">Con todo mi amor,</p>
+                                <p class="italic text-naranja-600">Tu nombre</p>
+                            </div>
+                            
+                            <!-- Elementos decorativos animados -->
+                            <div class="absolute top-6 left-6 rotate-continuous">
+                                <svg class="w-8 h-8 text-naranja-300" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                                </svg>
+                            </div>
+                            <div class="absolute bottom-6 right-6 rotate-continuous" style="animation-delay: 1s;">
+                                <svg class="w-8 h-8 text-naranja-300" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instrucciones -->
+            <div class="text-center mb-12 animate-pulse-slow">
+                <p class="text-lg text-naranja-600 font-medium">Pasa el cursor sobre la tarjeta para abrirla</p>
+                <p class="text-sm text-naranja-500 mt-2">(En dispositivos móviles, toca la tarjeta)</p>
+            </div>
+
+            <!-- Características -->
+            
+        </div>
+    </main>
+
+   
+    <!-- Script para manejar la interacción en dispositivos móviles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.card-open');
+            
+            // Para dispositivos táctiles
+            if ('ontouchstart' in window) {
+                card.addEventListener('touchstart', function() {
+                    this.classList.toggle('hover');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
